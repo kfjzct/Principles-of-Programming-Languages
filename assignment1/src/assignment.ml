@@ -89,12 +89,7 @@ let rec proj2 (ls : ('a * 'b) list) : 'b list = match ls with
   - : int list = [7]
 *)
 
-(*List.map implemented for later use*)
-let rec list_map lst f =
-  match lst with
-  | [] -> []
-  | hd :: tl -> f hd :: list_map tl f
-;;
+
 
 let rec filter_map (ls : 'a list) (f : 'a -> 'b option) : 'b list = 
   match ls with
@@ -273,7 +268,12 @@ let rec equal_list (a : 'a list) (b : 'a list) (equal : 'a -> 'a -> bool) : bool
   - : bool = true
 *)
 
-
+(*List.map implemented for later use*)
+let rec list_map lst f =
+  match lst with
+  | [] -> []
+  | hd :: tl -> f hd :: list_map tl f
+;;
 
 (*list.rev function implemented*)
 let list_rev lst =
@@ -342,11 +342,3 @@ let verify_solution (grid : int list list) (col_clues : int list list) (row_clue
   valid
 ;;
 
-(*
-   
-let valid = 
-    is_rectangular grid && 
-
-
-
-*)
