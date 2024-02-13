@@ -1,7 +1,0 @@
-
-(test
-  (name tests)
-  (modules tests)
-  (libraries
-    ounit2
-    assignment))

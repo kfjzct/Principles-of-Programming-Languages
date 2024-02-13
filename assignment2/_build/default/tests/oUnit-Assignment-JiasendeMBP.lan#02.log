@@ -1,0 +1,20 @@
+2024-02-13T20:25:20+00:00 JiasendeMBP.lan#02 I: Start test Assignment:1:Section2:0:cut_sequence.
+2024-02-13T20:25:20+00:00 JiasendeMBP.lan#02 I: Test Assignment:1:Section2:0:cut_sequence is successful.
+2024-02-13T20:25:20+00:00 JiasendeMBP.lan#02 I: End test Assignment:1:Section2:0:cut_sequence.
+2024-02-13T20:25:20+00:00 JiasendeMBP.lan#02 I: Start test Assignment:1:Section2:2:naturals.
+2024-02-13T20:25:20+00:00 JiasendeMBP.lan#02 I: Test Assignment:1:Section2:2:naturals is successful.
+2024-02-13T20:25:20+00:00 JiasendeMBP.lan#02 I: End test Assignment:1:Section2:2:naturals.
+2024-02-13T20:25:20+00:00 JiasendeMBP.lan#02 I: Start test Assignment:1:Section2:4:fibonacci.
+2024-02-13T20:25:20+00:00 JiasendeMBP.lan#02 I: Test Assignment:1:Section2:4:fibonacci is successful.
+2024-02-13T20:25:20+00:00 JiasendeMBP.lan#02 I: End test Assignment:1:Section2:4:fibonacci.
+2024-02-13T20:25:20+00:00 JiasendeMBP.lan#02 I: Start test Assignment:1:Section2:6:fub.
+2024-02-13T20:25:20+00:00 JiasendeMBP.lan#02 I: Test Assignment:1:Section2:6:fub is successful.
+2024-02-13T20:25:20+00:00 JiasendeMBP.lan#02 I: End test Assignment:1:Section2:6:fub.
+2024-02-13T20:25:20+00:00 JiasendeMBP.lan#02 I: Start test Assignment:2:Section3:3:greatest_child_sum.
+2024-02-13T20:25:20+00:00 JiasendeMBP.lan#02 E: Test Assignment:2:Section3:3:greatest_child_sum exited with an error.
+2024-02-13T20:25:20+00:00 JiasendeMBP.lan#02 E: Failure("unimplemented") in test Assignment:2:Section3:3:greatest_child_sum.
+2024-02-13T20:25:20+00:00 JiasendeMBP.lan#02 E: Raised at Stdlib.failwith in file "stdlib.ml", line 29, characters 17-33
+2024-02-13T20:25:20+00:00 JiasendeMBP.lan#02 E: Called from Dune__exe__Tests.test_greatest_child_sum in file "tests/tests.ml", line 121, characters 46-72
+2024-02-13T20:25:20+00:00 JiasendeMBP.lan#02 E: Called from OUnitRunner.run_one_test.(fun) in file "src/lib/ounit2/advanced/oUnitRunner.ml", line 83, characters 13-26
+2024-02-13T20:25:20+00:00 JiasendeMBP.lan#02 E: 
+2024-02-13T20:25:20+00:00 JiasendeMBP.lan#02 I: End test Assignment:2:Section3:3:greatest_child_sum.

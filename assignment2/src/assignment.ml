@@ -24,11 +24,11 @@
 *)
 
 (* Disables "unused variable" warning from dune while you're still solving these! *)
-[@@@ocaml.warning "-27"]
+[@@@ocaml.warning "-27"] ;;
 
 (* Here is again our unimplemented "BOOM" function for questions you have not yet answered *)
 
-let unimplemented _ = failwith "unimplemented"
+let unimplemented _ = failwith "unimplemented" ;;
 
 (* ************** Section 1: Thinking like a type inferencer ************** *)
 
@@ -41,22 +41,39 @@ let unimplemented _ = failwith "unimplemented"
    for you to make it clear.
 *)
 
-let f0 : 'a. 'a -> int = fun _ -> 4 (* answered for you *)
-let f1 : 'a 'b. 'a -> 'b -> 'b * 'a = unimplemented
-let f2 : 'a 'b. 'a * 'b -> 'a = unimplemented
-let f3 : 'a 'b 'c. ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c = unimplemented
-let f4 : 'a 'b. 'a option -> ('a -> 'b) -> 'b option = unimplemented
-let f5 : 'a. 'a list list -> 'a list = unimplemented
-let f6 : 'a 'b 'c. ('a, 'b) result -> ('b -> 'c) -> 'c option = unimplemented
+let f0 : 'a. 'a -> int = fun _ -> 4;; (* answered for you *)
+let f1 : 'a 'b. 'a -> 'b -> 'b * 'a = fun a b -> (b, a);;
+let f2 : 'a 'b. 'a * 'b -> 'a = fun (a, b) -> a;;
+let f3 : 'a 'b 'c. ('a -> 'b) -> ('b -> 'c) -> 'a -> 'c = fun f1 f2 a -> f2 (f1 a);;
+let f4 : 'a 'b. 'a option -> ('a -> 'b) -> 'b option = fun option f ->
+  match option with
+  | Some a -> Some (f a)
+  | None -> None;;
+let f5 : 'a. 'a list list -> 'a list = fun lists -> List.concat lists;;
+let f6 : 'a 'b 'c. ('a, 'b) result -> ('b -> 'c) -> 'c option = 
+  fun result f ->
+    match result with
+    | Error a -> Some (f a)
+    | Ok _ -> None;;
 
-type ('a, 'b) sometype = Left of 'a | Right of 'b
+type ('a, 'b) sometype = Left of 'a | Right of 'b;;
 
 let f7 :
       'a 'b 'c 'd.
       ('a -> 'c) -> ('b -> 'c) -> ('a, 'b) sometype -> ('d, 'c) sometype =
-  unimplemented
+      fun f1 f2 sometype ->
+        match sometype with
+        | Left a -> Right (f1 a)
+        | Right b -> Right (f2 b);;
 
-let f8 : 'a 'b. ('a, 'b) sometype list -> 'a list * 'b list = unimplemented
+(*look back here again*)
+let f8 : 'a 'b. ('a, 'b) sometype list -> 'a list * 'b list = fun sometype_list ->
+  let rec split_types acc_a acc_b = function
+    | [] -> (List.rev acc_a, List.rev acc_b)
+    | Left a :: rest -> split_types (a :: acc_a) acc_b rest
+    | Right b :: rest -> split_types acc_a (b :: acc_b) rest
+  in
+  split_types [] [] sometype_list;;
 
 (* ************** Section 2 : An ode to being lazy ************** *)
 
@@ -75,33 +92,39 @@ let f8 : 'a 'b. ('a, 'b) sometype list -> 'a list * 'b list = unimplemented
    We will give you the type of lazy sequences to help you get going on this question:
 *)
 
-type 'a sequence = Nil | Sequence of 'a * (unit -> 'a sequence)
+type 'a sequence = Nil | Sequence of 'a * (unit -> 'a sequence);;
 
 (*
    This is similar to the list type; the difference is the `unit ->` which keeps
    the tail of the list from running by making it a function.
    Here for example is how you would write an infinite sequence of zeroes:
 *)
-let rec zeroes = Sequence (0, fun () -> zeroes)
+let rec zeroes = Sequence (0, fun () -> zeroes);;
 
 (*
   Here is a dummy sequence used in templates below. Remove this from the templates,
   and replace it with your answer.
 *)
-let unimplemented_int_sequence = Sequence (0, fun () -> unimplemented ())
+let unimplemented_int_sequence = Sequence (0, fun () -> unimplemented ());;
 
 (*
    It is still possible to express finite lists as sequences,
    for example here is [1; 2] as a sequence, with `Nil` denoting the empty sequence.
 *)
-let one_and_two = Sequence (1, fun () -> Sequence (2, fun () -> Nil))
+let one_and_two = Sequence (1, fun () -> Sequence (2, fun () -> Nil));;
 
 (*
   Write a function to convert a sequence to a list. Of course if you try to 
   evaluate this on an infinite sequence such as `zeroes` above, it will not finish. 
   But we will assume sanity on the caller's part and ignore that issue in this question.  
 *)
-let list_of_sequence (s : 'a sequence) : 'a list = unimplemented ()
+let rec list_of_sequence (s : 'a sequence) : 'a list = 
+  match s with
+  | Nil -> []
+  | Sequence (head, tail) ->
+      let inner_sequence = tail () in
+      head :: list_of_sequence inner_sequence
+  ;;
 
 (*
    # list_of_sequence one_and_two ;;
@@ -118,7 +141,10 @@ let list_of_sequence (s : 'a sequence) : 'a list = unimplemented ()
   than the specified count, the output sequence can have less than `n` values)
 *)
 
-let cut_sequence (n : int) (s : 'a sequence) : 'a sequence = unimplemented ()
+let rec cut_sequence (n : int) (s : 'a sequence) : 'a sequence = 
+  match n, s with
+  | 0, _ | _, Nil -> Nil
+  | _, Sequence (head, tail) -> Sequence (head, fun () -> cut_sequence (n - 1) (tail ()));;
 
 (*
    # list_of_sequence (cut_sequence 5 zeroes) ;;
@@ -128,7 +154,13 @@ let cut_sequence (n : int) (s : 'a sequence) : 'a sequence = unimplemented ()
 (*
   Create a sequence for the natural numbers, starting with 0.
 *)
-let naturals : int sequence = unimplemented_int_sequence
+
+
+let naturals : int sequence = 
+  let rec naturals_from (start : int) : int sequence =
+    Sequence (start, fun () -> naturals_from (start + 1))
+  in
+  naturals_from 0;;
 
 (*
    # list_of_sequence (cut_sequence 5 naturals) ;;
@@ -145,7 +177,14 @@ let naturals : int sequence = unimplemented_int_sequence
 *)
 
 let mapi_sequence (fn : int -> 'a -> 'b) (s : 'a sequence) : 'b sequence =
-  unimplemented ()
+  let rec mapi_helper (index : int) (s : 'a sequence) : 'b sequence =
+    match s with
+    | Nil -> Nil
+    | Sequence (head, tail) ->
+      let mapped_head = fn index head in
+      Sequence (mapped_head, fun () -> mapi_helper (index + 1) (tail ()))
+  in
+  mapi_helper 0 s;;
 
 (*
    # list_of_sequence (mapi_sequence (fun i -> fun x -> i + x) one_and_two) ;;
@@ -160,7 +199,11 @@ let mapi_sequence (fn : int -> 'a -> 'b) (s : 'a sequence) : 'b sequence =
    triangle numbers)
 *)
 
-let triangles : int sequence = unimplemented_int_sequence
+let triangles : int sequence = 
+  let rec triangles_from (n : int) : int sequence =
+    Sequence ((n * (n + 1)) / 2, fun () -> triangles_from (n + 1))
+  in
+  triangles_from 0;;
 
 (*
    # list_of_sequence (cut_sequence 10 triangles) ;;
@@ -173,7 +216,16 @@ let triangles : int sequence = unimplemented_int_sequence
    the fibonacci sequence)
 *)
 
-let fibonacci : int sequence = unimplemented_int_sequence
+let fibonacci : int sequence = 
+  let rec fibonacci_at n : int sequence =
+    Sequence (fibonacci_number n, fun () -> fibonacci_at (n + 1))
+  and fibonacci_number n : int =
+    if n = 0 then 0
+    else if n = 1 then 1
+    else fibonacci_number (n - 1) + fibonacci_number (n - 2)
+  in
+  fibonacci_at 0
+  ;;
 
 (*
    # list_of_sequence (cut_sequence 12 fibonacci) ;;
@@ -205,7 +257,17 @@ let fibonacci : int sequence = unimplemented_int_sequence
   
   Create an infinite sequence that represents the fub sequence.
 *)
-let fub : int sequence = unimplemented_int_sequence
+let fub : int sequence = 
+  let rec fub_at n : int sequence =
+    Sequence (fub_number n, fun () -> fub_at (n + 1))
+  and fub_number n : int =
+    if n = 0 then 0
+    else if n = 1 then 1
+    else if n mod 2 = 0 then fub_number (n / 2)
+    else fub_number (n - 1) + fub_number (n + 1)
+  in
+  fub_at 0
+;;
 
 (*
   # list_of_sequence (cut_sequence 15 fub) ;;
@@ -267,8 +329,13 @@ let atree =
    Note that n_tree lacks a completely empty tree case in the type; use 
    invalid_arg appropriately if the input list is empty.
 *)
-let decode_tree (l : ('a * int) list) : 'a n_tree = unimplemented ()
-
+let rec take n lst =
+  if n <= 0 then [], lst
+  else match lst with
+    | [] -> [], []
+    | x :: xs -> let taken, remaining = take (n - 1) xs in x :: taken, remaining
+  
+let decode_tree (l : ('a * int) list) : 'a n_tree = unimplemented()
 let coded_tree =
   [ (1, 2); (2, 4); (3, 0); (4, 0); (5, 1); (6, 0); (7, 0); (8, 0) ]
 
@@ -350,15 +417,26 @@ let greatest_child_sum (tree : int n_tree) :
   Given any function f as an argument, create a function that returns a
   data structure consisting of f and its cache.
 *)
-let new_cached_fun f = unimplemented ()
+
+type 'a cache_entry = { input: 'a; result: 'a }
+
+type 'a cached_function = {
+  original_function: 'a -> 'a;
+  cache: 'a cache_entry list ref;
+}
+let new_cached_fun f = 
+  let cache = ref [] in
+  let original_function x = f x in
+  { original_function; cache }
+
 
 (*
   Write a function that takes the above function-cache data structure,
   applies an argument to it (using the cache if possible) and returns
   the result.
 *)
-let apply_fun_with_cache cached_fn x = unimplemented ()
-
+let apply_fun_with_cache cached_fn x = 
+  cached_fn.original_function x
 (*
   The following function makes a cached version for f that looks
   identical to f; users can't see that values are being cached 
