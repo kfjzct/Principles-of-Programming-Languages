@@ -21,57 +21,20 @@
 #        }
 #  ; instrument_with = []
 #  }
-$ /Users/jiasenjing/.opam/5.1.1/bin/ocamlc.opt -config > /var/folders/_h/y650_h996_xc65c81sb0kt5m0000gn/T/dune_05d678_output
+$ /Users/jiasenjing/.opam/5.1.1/bin/ocamlc.opt -config > /var/folders/_h/y650_h996_xc65c81sb0kt5m0000gn/T/dune_d68cf8_output
 $ (cd _build/default/tests && ./tests.exe)
-> .......E.EEE.
-> ==============================================================================
-> Error: Assignment:2:Section3:3:greatest_child_sum.
->
-> File "/Users/jiasenjing/Desktop/code/principles of programming languages/assignment2/_build/default/tests/oUnit-Assignment-JiasendeMBP.lan#02.log", line 14, characters 1-1:
-> Error: Assignment:2:Section3:3:greatest_child_sum (in the log).
->
-> Raised at Stdlib.failwith in file "stdlib.ml", line 29, characters 17-33
-> Called from Dune__exe__Tests.test_greatest_child_sum in file "tests/tests.ml", line 121, characters 46-72
-> Called from OUnitRunner.run_one_test.(fun) in file "src/lib/ounit2/advanced/oUnitRunner.ml", line 83, characters 13-26
->
-> Failure("unimplemented")
-> ------------------------------------------------------------------------------
-> ==============================================================================
-> Error: Assignment:2:Section3:2:tree_fold_postorder.
->
-> File "/Users/jiasenjing/Desktop/code/principles of programming languages/assignment2/_build/default/tests/oUnit-Assignment-JiasendeMBP.lan#01.log", line 30, characters 1-1:
-> Error: Assignment:2:Section3:2:tree_fold_postorder (in the log).
->
-> Raised at Stdlib.failwith in file "stdlib.ml", line 29, characters 17-33
-> Called from Dune__exe__Tests.test_tree_fold_postorder in file "tests/tests.ml", line 116, characters 18-70
-> Called from OUnitRunner.run_one_test.(fun) in file "src/lib/ounit2/advanced/oUnitRunner.ml", line 83, characters 13-26
->
-> Failure("unimplemented")
-> ------------------------------------------------------------------------------
-> ==============================================================================
-> Error: Assignment:2:Section3:1:tree_fold_preorder.
->
-> File "/Users/jiasenjing/Desktop/code/principles of programming languages/assignment2/_build/default/tests/oUnit-Assignment-JiasendeMBP.lan#01.log", line 22, characters 1-1:
-> Error: Assignment:2:Section3:1:tree_fold_preorder (in the log).
->
-> Raised at Stdlib.failwith in file "stdlib.ml", line 29, characters 17-33
-> Called from Dune__exe__Tests.test_tree_fold_preorder in file "tests/tests.ml", line 111, characters 18-69
-> Called from OUnitRunner.run_one_test.(fun) in file "src/lib/ounit2/advanced/oUnitRunner.ml", line 83, characters 13-26
->
-> Failure("unimplemented")
-> ------------------------------------------------------------------------------
+> .......F.....
 > ==============================================================================
 > Error: Assignment:2:Section3:0:decode_tree.
 >
-> File "/Users/jiasenjing/Desktop/code/principles of programming languages/assignment2/_build/default/tests/oUnit-Assignment-JiasendeMBP.lan#01.log", line 14, characters 1-1:
+> File "/Users/jiasenjing/Desktop/code/principles of programming languages/assignment2/_build/default/tests/oUnit-Assignment-JiasendeMBP.lan#02.log", line 11, characters 1-1:
 > Error: Assignment:2:Section3:0:decode_tree (in the log).
 >
-> Raised at Stdlib.failwith in file "stdlib.ml", line 29, characters 17-33
-> Called from Dune__exe__Tests.test_decode_tree in file "tests/tests.ml", line 102, characters 15-39
+> Raised at OUnitAssert.assert_failure in file "src/lib/ounit2/advanced/oUnitAssert.ml", line 45, characters 2-27
 > Called from OUnitRunner.run_one_test.(fun) in file "src/lib/ounit2/advanced/oUnitRunner.ml", line 83, characters 13-26
 >
-> Failure("unimplemented")
+> not equal
 > ------------------------------------------------------------------------------
 > Ran: 13 tests in: 0.11 seconds.
-> FAILED: Cases: 13 Tried: 13 Errors: 4 Failures: 0 Skip:  0 Todo: 0 Timeouts: 0.
+> FAILED: Cases: 13 Tried: 13 Errors: 0 Failures: 1 Skip:  0 Todo: 0 Timeouts: 0.
 [1]

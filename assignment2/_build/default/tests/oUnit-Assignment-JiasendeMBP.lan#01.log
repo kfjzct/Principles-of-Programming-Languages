@@ -1,39 +1,21 @@
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 I: Start test Assignment:0:Section1:0:FunctionTypes.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 I: Test Assignment:0:Section1:0:FunctionTypes is successful.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 I: End test Assignment:0:Section1:0:FunctionTypes.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 I: Start test Assignment:1:Section2:1:list_of_sequence.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 I: Test Assignment:1:Section2:1:list_of_sequence is successful.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 I: End test Assignment:1:Section2:1:list_of_sequence.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 I: Start test Assignment:1:Section2:3:triangles.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 I: Test Assignment:1:Section2:3:triangles is successful.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 I: End test Assignment:1:Section2:3:triangles.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 I: Start test Assignment:1:Section2:5:mapi_sequence.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 I: Test Assignment:1:Section2:5:mapi_sequence is successful.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 I: End test Assignment:1:Section2:5:mapi_sequence.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 I: Start test Assignment:2:Section3:0:decode_tree.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 E: Test Assignment:2:Section3:0:decode_tree exited with an error.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 E: Failure("unimplemented") in test Assignment:2:Section3:0:decode_tree.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 E: Raised at Stdlib.failwith in file "stdlib.ml", line 29, characters 17-33
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 E: Called from Dune__exe__Tests.test_decode_tree in file "tests/tests.ml", line 102, characters 15-39
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 E: Called from OUnitRunner.run_one_test.(fun) in file "src/lib/ounit2/advanced/oUnitRunner.ml", line 83, characters 13-26
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 E: 
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 I: End test Assignment:2:Section3:0:decode_tree.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 I: Start test Assignment:2:Section3:1:tree_fold_preorder.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 E: Test Assignment:2:Section3:1:tree_fold_preorder exited with an error.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 E: Failure("unimplemented") in test Assignment:2:Section3:1:tree_fold_preorder.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 E: Raised at Stdlib.failwith in file "stdlib.ml", line 29, characters 17-33
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 E: Called from Dune__exe__Tests.test_tree_fold_preorder in file "tests/tests.ml", line 111, characters 18-69
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 E: Called from OUnitRunner.run_one_test.(fun) in file "src/lib/ounit2/advanced/oUnitRunner.ml", line 83, characters 13-26
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 E: 
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 I: End test Assignment:2:Section3:1:tree_fold_preorder.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 I: Start test Assignment:2:Section3:2:tree_fold_postorder.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 E: Test Assignment:2:Section3:2:tree_fold_postorder exited with an error.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 E: Failure("unimplemented") in test Assignment:2:Section3:2:tree_fold_postorder.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 E: Raised at Stdlib.failwith in file "stdlib.ml", line 29, characters 17-33
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 E: Called from Dune__exe__Tests.test_tree_fold_postorder in file "tests/tests.ml", line 116, characters 18-70
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 E: Called from OUnitRunner.run_one_test.(fun) in file "src/lib/ounit2/advanced/oUnitRunner.ml", line 83, characters 13-26
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 E: 
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 I: End test Assignment:2:Section3:2:tree_fold_postorder.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 I: Start test Assignment:3:Section4:0:CachedFun.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 I: Test Assignment:3:Section4:0:CachedFun is successful.
-2024-02-13T20:25:20+00:00 JiasendeMBP.lan#01 I: End test Assignment:3:Section4:0:CachedFun.
+2024-02-15T00:27:10+00:00 JiasendeMBP.lan#01 I: Start test Assignment:0:Section1:0:FunctionTypes.
+2024-02-15T00:27:10+00:00 JiasendeMBP.lan#01 I: Test Assignment:0:Section1:0:FunctionTypes is successful.
+2024-02-15T00:27:10+00:00 JiasendeMBP.lan#01 I: End test Assignment:0:Section1:0:FunctionTypes.
+2024-02-15T00:27:10+00:00 JiasendeMBP.lan#01 I: Start test Assignment:1:Section2:1:list_of_sequence.
+2024-02-15T00:27:10+00:00 JiasendeMBP.lan#01 I: Test Assignment:1:Section2:1:list_of_sequence is successful.
+2024-02-15T00:27:10+00:00 JiasendeMBP.lan#01 I: End test Assignment:1:Section2:1:list_of_sequence.
+2024-02-15T00:27:10+00:00 JiasendeMBP.lan#01 I: Start test Assignment:1:Section2:3:triangles.
+2024-02-15T00:27:10+00:00 JiasendeMBP.lan#01 I: Test Assignment:1:Section2:3:triangles is successful.
+2024-02-15T00:27:10+00:00 JiasendeMBP.lan#01 I: End test Assignment:1:Section2:3:triangles.
+2024-02-15T00:27:10+00:00 JiasendeMBP.lan#01 I: Start test Assignment:1:Section2:4:fibonacci.
+2024-02-15T00:27:10+00:00 JiasendeMBP.lan#01 I: Test Assignment:1:Section2:4:fibonacci is successful.
+2024-02-15T00:27:10+00:00 JiasendeMBP.lan#01 I: End test Assignment:1:Section2:4:fibonacci.
+2024-02-15T00:27:10+00:00 JiasendeMBP.lan#01 I: Start test Assignment:1:Section2:6:fub.
+2024-02-15T00:27:10+00:00 JiasendeMBP.lan#01 I: Test Assignment:1:Section2:6:fub is successful.
+2024-02-15T00:27:10+00:00 JiasendeMBP.lan#01 I: End test Assignment:1:Section2:6:fub.
+2024-02-15T00:27:10+00:00 JiasendeMBP.lan#01 I: Start test Assignment:2:Section3:2:tree_fold_postorder.
+2024-02-15T00:27:10+00:00 JiasendeMBP.lan#01 I: Test Assignment:2:Section3:2:tree_fold_postorder is successful.
+2024-02-15T00:27:10+00:00 JiasendeMBP.lan#01 I: End test Assignment:2:Section3:2:tree_fold_postorder.
+2024-02-15T00:27:10+00:00 JiasendeMBP.lan#01 I: Start test Assignment:3:Section4:0:CachedFun.
+2024-02-15T00:27:10+00:00 JiasendeMBP.lan#01 I: Test Assignment:3:Section4:0:CachedFun is successful.
+2024-02-15T00:27:10+00:00 JiasendeMBP.lan#01 I: End test Assignment:3:Section4:0:CachedFun.

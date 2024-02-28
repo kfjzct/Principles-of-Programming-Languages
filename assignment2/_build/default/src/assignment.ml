@@ -68,8 +68,9 @@ let f7 :
 
 (*look back here again*)
 let f8 : 'a 'b. ('a, 'b) sometype list -> 'a list * 'b list = fun sometype_list ->
-  let rec split_types acc_a acc_b = function
-    | [] -> (List.rev acc_a, List.rev acc_b)
+  let rec split_types acc_a acc_b lst =
+    match lst with
+    | [] -> (acc_a, acc_b)
     | Left a :: rest -> split_types (a :: acc_a) acc_b rest
     | Right b :: rest -> split_types acc_a (b :: acc_b) rest
   in
@@ -329,13 +330,26 @@ let atree =
    Note that n_tree lacks a completely empty tree case in the type; use 
    invalid_arg appropriately if the input list is empty.
 *)
-let rec take n lst =
-  if n <= 0 then [], lst
-  else match lst with
-    | [] -> [], []
-    | x :: xs -> let taken, remaining = take (n - 1) xs in x :: taken, remaining
-  
-let decode_tree (l : ('a * int) list) : 'a n_tree = unimplemented()
+
+let decode_tree (l : ('a * int) list) : 'a n_tree =
+  let rec decode_subtree num_children rest =
+    if num_children = 0 then
+      [], rest
+    else
+      match rest with
+      | (child, _) :: rest' ->
+        let remaining_children, rest'' = decode_subtree (num_children - 1) rest' in
+        (Node (child, [])) :: remaining_children, rest''
+      | _ -> invalid_arg "end of input"
+  in
+  match l with
+  | [] -> invalid_arg "decode_tree: empty list"
+  | (data, num_children) :: rest ->
+    let children, rest' = decode_subtree num_children rest in
+    Node (data, children)
+
+
+
 let coded_tree =
   [ (1, 2); (2, 4); (3, 0); (4, 0); (5, 1); (6, 0); (7, 0); (8, 0) ]
 
@@ -349,17 +363,22 @@ let coded_tree =
    E.G.
      tree_fold (fun acc n -> acc + n) 0 atree = 36
 *)
-let tree_fold_preorder (f : 'a -> 'b -> 'a) (acc : 'a) (tree : 'b n_tree) : 'a =
-  unimplemented ()
+let rec tree_fold_preorder (f : 'a -> 'b -> 'a) (acc : 'a) (tree : 'b n_tree) : 'a =
+  match tree with
+  | Node (data, children) ->
+    let acc' = f acc data in
+    List.fold_left (tree_fold_preorder f) acc' children;;
 
 (*
   Now write a function to fold over all elements in the tree in a postorder
   manner. Still fold left over all children and apply the function to the element
   value on the way back up from the recursion.
 *)
-let tree_fold_postorder (f : 'a -> 'b -> 'a) (acc : 'a) (tree : 'b n_tree) : 'a
-    =
-  unimplemented ()
+let rec tree_fold_postorder (f : 'a -> 'b -> 'a) (acc : 'a) (tree : 'b n_tree) : 'a =
+  match tree with
+  | Node (data, children) ->
+    let acc' = List.fold_left (tree_fold_postorder f) acc children in
+    f acc' data
 
 (*
   Write a function to find the node in the tree whose immediate children have the
@@ -383,9 +402,25 @@ let tree_fold_postorder (f : 'a -> 'b -> 'a) (acc : 'a) (tree : 'b n_tree) : 'a
   function will return
     ( `Node_value 2, `Child_sum 19 )
 *)
-let greatest_child_sum (tree : int n_tree) :
+type 'a result = [ `Node_value of 'a ] * [ `Child_sum of 'a ];;
+let rec greatest_child_sum (tree : int n_tree) :
     [ `Node_value of int ] * [ `Child_sum of int ] =
-  unimplemented ()
+  let sum_of_children = function
+    | Node (_, children) -> List.fold_left (fun acc (Node (x, _)) -> acc + x) 0 children
+  in
+  match tree with
+  | Node (data, children) ->
+    let child_sum = sum_of_children tree in
+    let max_child_sum, max_child_result =
+      List.fold_left  
+        (fun (max_sum, max_result) child ->
+          let current_sum = sum_of_children child in
+          if current_sum > max_sum then (current_sum, greatest_child_sum child)
+          else (max_sum, max_result))
+        (child_sum, (`Node_value data, `Child_sum child_sum))
+        children
+    in
+    max_child_result
 
 (*************** Section 4: Mutable State and Memoization ******************)
 

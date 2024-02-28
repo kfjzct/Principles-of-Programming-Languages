@@ -1,0 +1,36 @@
+# dune utop Fb
+# OCAMLPARAM: unset
+# Shared cache: disabled
+# Shared cache location: /Users/jiasenjing/.cache/dune/db
+# Workspace root: "/Users/jiasenjing/Desktop/code/principles of programming
+# languages/assignment 4/dist"
+# Auto-detected concurrency: 10
+# Dune context:
+#  { name = "default"
+#  ; kind = "default"
+#  ; profile = Dev
+#  ; merlin = true
+#  ; fdo_target_exe = None
+#  ; build_dir = In_build_dir "default"
+#  ; installed_env =
+#      map
+#        { "INSIDE_DUNE" :
+#            "/Users/jiasenjing/Desktop/code/principles of programming languages/assignment 4/dist/_build/default"
+#        ; "OCAML_COLOR" : "always"
+#        ; "OPAMCOLOR" : "always"
+#        }
+#  ; instrument_with = []
+#  }
+$ /Users/jiasenjing/.opam/5.1.1/bin/ocamlc.opt -config > /var/folders/_h/y650_h996_xc65c81sb0kt5m0000gn/T/dune_282ef8_output
+$ (cd _build/default/build_scripts && /bin/chmod +x ./gen_version.sh)
+$ (cd _build/default/build_scripts && ./gen_version.sh)
+$ (cd _build/.sandbox/02d856919e228028b7592e9b090ab794/default && .ppx/0bb5094b13567c3c4e1ee33245b80e63/ppx.exe --cookie 'library-name="fb"' -o Fb/version.pp.ml --impl Fb/version.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/.sandbox/f0c5d3610dcf30e049db4a3839c5f5c1/default && .ppx/0bb5094b13567c3c4e1ee33245b80e63/ppx.exe --cookie 'library-name="fb"' -o Fb/fbinterp.pp.ml --impl Fb/fbinterp.ml -corrected-suffix .ppx-corrected -diff-cmd - -dump-ast)
+$ (cd _build/default && /Users/jiasenjing/.opam/5.1.1/bin/ocamldep.opt -modules -impl Fb/version.pp.ml) > _build/default/Fb/.fb.objs/version.impl.d
+$ (cd _build/default && /Users/jiasenjing/.opam/5.1.1/bin/ocamldep.opt -modules -impl Fb/fbinterp.pp.ml) > _build/default/Fb/.fb.objs/fbinterp.impl.d
+$ (cd _build/default && /Users/jiasenjing/.opam/5.1.1/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -27-33-39 -g -bin-annot -I Fb/.fb.objs/byte -I /Users/jiasenjing/.opam/5.1.1/lib/ppx_deriving/runtime -I /Users/jiasenjing/.opam/5.1.1/lib/result -no-alias-deps -opaque -o Fb/.fb.objs/byte/version.cmo -c -impl Fb/version.pp.ml)
+$ (cd _build/default && /Users/jiasenjing/.opam/5.1.1/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -27-33-39 -g -bin-annot -I Fb/.fb.objs/byte -I /Users/jiasenjing/.opam/5.1.1/lib/ppx_deriving/runtime -I /Users/jiasenjing/.opam/5.1.1/lib/result -no-alias-deps -opaque -o Fb/.fb.objs/byte/fbinterp.cmo -c -impl Fb/fbinterp.pp.ml)
+$ (cd _build/default && /Users/jiasenjing/.opam/5.1.1/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -27-33-39 -g -bin-annot -I Fb/.fb.objs/byte -I /Users/jiasenjing/.opam/5.1.1/lib/ppx_deriving/runtime -I /Users/jiasenjing/.opam/5.1.1/lib/result -intf-suffix .ml -no-alias-deps -opaque -o Fb/.fb.objs/byte/fbdk.cmo -c -impl Fb/fbdk.pp.ml)
+$ (cd _build/default && /Users/jiasenjing/.opam/5.1.1/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -24 -g -bin-annot -I Fb/.utop/.utop.eobjs/byte -I /Users/jiasenjing/.opam/5.1.1/lib/bytes -I /Users/jiasenjing/.opam/5.1.1/lib/findlib -I /Users/jiasenjing/.opam/5.1.1/lib/lambda-term -I /Users/jiasenjing/.opam/5.1.1/lib/logs -I /Users/jiasenjing/.opam/5.1.1/lib/lwt -I /Users/jiasenjing/.opam/5.1.1/lib/lwt/unix -I /Users/jiasenjing/.opam/5.1.1/lib/lwt_react -I /Users/jiasenjing/.opam/5.1.1/lib/mew -I /Users/jiasenjing/.opam/5.1.1/lib/mew_vi -I /Users/jiasenjing/.opam/5.1.1/lib/ocaml/compiler-libs -I /Users/jiasenjing/.opam/5.1.1/lib/ocaml/threads -I /Users/jiasenjing/.opam/5.1.1/lib/ocaml/unix -I /Users/jiasenjing/.opam/5.1.1/lib/ocplib-endian -I /Users/jiasenjing/.opam/5.1.1/lib/ocplib-endian/bigstring -I /Users/jiasenjing/.opam/5.1.1/lib/ppx_deriving/runtime -I /Users/jiasenjing/.opam/5.1.1/lib/react -I /Users/jiasenjing/.opam/5.1.1/lib/result -I /Users/jiasenjing/.opam/5.1.1/lib/trie -I /Users/jiasenjing/.opam/5.1.1/lib/uchar -I /Users/jiasenjing/.opam/5.1.1/lib/utop -I /Users/jiasenjing/.opam/5.1.1/lib/uucp -I /Users/jiasenjing/.opam/5.1.1/lib/uuseg -I /Users/jiasenjing/.opam/5.1.1/lib/uutf -I /Users/jiasenjing/.opam/5.1.1/lib/xdg -I /Users/jiasenjing/.opam/5.1.1/lib/zed -I Fb/.fb.objs/byte -no-alias-deps -o Fb/.utop/.utop.eobjs/byte/dune__exe__Utop.cmo -c -impl Fb/.utop/utop.ml-gen)
+$ (cd _build/default && /Users/jiasenjing/.opam/5.1.1/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -27-33-39 -g -a -o Fb/fb.cma Fb/.fb.objs/byte/version.cmo Fb/.fb.objs/byte/fbast.cmo Fb/.fb.objs/byte/fbtype.cmo Fb/.fb.objs/byte/fbpp.cmo Fb/.fb.objs/byte/fbparser.cmo Fb/.fb.objs/byte/fboptions.cmo Fb/.fb.objs/byte/fblexer.cmo Fb/.fb.objs/byte/fbinterp.cmo Fb/.fb.objs/byte/fbdk.cmo Fb/.fb.objs/byte/debugutils.cmo)
+$ (cd _build/default && /Users/jiasenjing/.opam/5.1.1/bin/ocamlc.opt -w @1..3@5..28@30..39@43@46..47@49..57@61..62@67@69-40 -strict-sequence -strict-formats -short-paths -keep-locs -w -24 -g -o Fb/.utop/utop.bc /Users/jiasenjing/.opam/5.1.1/lib/ocaml/compiler-libs/ocamlcommon.cma /Users/jiasenjing/.opam/5.1.1/lib/ocaml/compiler-libs/ocamlbytecomp.cma /Users/jiasenjing/.opam/5.1.1/lib/ocaml/compiler-libs/ocamltoplevel.cma /Users/jiasenjing/.opam/5.1.1/lib/findlib/findlib.cma /Users/jiasenjing/.opam/5.1.1/lib/findlib/findlib_top.cma /Users/jiasenjing/.opam/5.1.1/lib/logs/logs.cma /Users/jiasenjing/.opam/5.1.1/lib/lwt/lwt.cma /Users/jiasenjing/.opam/5.1.1/lib/logs/logs_lwt.cma /Users/jiasenjing/.opam/5.1.1/lib/ocplib-endian/ocplib_endian.cma /Users/jiasenjing/.opam/5.1.1/lib/ocplib-endian/bigstring/ocplib_endian_bigstring.cma /Users/jiasenjing/.opam/5.1.1/lib/ocaml/unix/unix.cma /Users/jiasenjing/.opam/5.1.1/lib/ocaml/threads/threads.cma /Users/jiasenjing/.opam/5.1.1/lib/lwt/unix/lwt_unix.cma -I /Users/jiasenjing/.opam/5.1.1/lib/lwt/../stublibs /Users/jiasenjing/.opam/5.1.1/lib/react/react.cma /Users/jiasenjing/.opam/5.1.1/lib/lwt_react/lwt_react.cma /Users/jiasenjing/.opam/5.1.1/lib/result/result.cma /Users/jiasenjing/.opam/5.1.1/lib/uutf/uutf.cma /Users/jiasenjing/.opam/5.1.1/lib/uucp/uucp.cma /Users/jiasenjing/.opam/5.1.1/lib/uuseg/uuseg.cma /Users/jiasenjing/.opam/5.1.1/lib/zed/zed.cma /Users/jiasenjing/.opam/5.1.1/lib/trie/trie.cma /Users/jiasenjing/.opam/5.1.1/lib/mew/mew.cma /Users/jiasenjing/.opam/5.1.1/lib/mew_vi/mew_vi.cma /Users/jiasenjing/.opam/5.1.1/lib/lambda-term/lambda_term.cma -I /Users/jiasenjing/.opam/5.1.1/lib/lambda-term/../stublibs /Users/jiasenjing/.opam/5.1.1/lib/xdg/xdg.cma -I /Users/jiasenjing/.opam/5.1.1/lib/xdg/../stublibs /Users/jiasenjing/.opam/5.1.1/lib/utop/uTop.cma /Users/jiasenjing/.opam/5.1.1/lib/ppx_deriving/runtime/ppx_deriving_runtime.cma Fb/fb.cma Fb/.utop/.utop.eobjs/byte/dune__exe__Utop.cmo -linkall -warn-error -31)
