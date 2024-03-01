@@ -5,20 +5,15 @@ exception NotClosed
 
 let rec check_closed expr = 
   let rec check expr bound_vars = match expr with
-    | Var (Ident x) -> if List.mem (Ident x) bound_vars then () else raise NotClosed
+    | Var (x) -> if List.mem (x) bound_vars then () else raise NotClosed
     | Int _ | Bool _ -> ()
     | Plus (e1, e2) | Minus (e1, e2) | Equal (e1, e2) | And (e1, e2) | Or (e1, e2) -> check e1 bound_vars; check e2 bound_vars
     | Not e -> check e bound_vars
     | If (e1, e2, e3) -> check e1 bound_vars; check e2 bound_vars; check e3 bound_vars
-    | Function (Ident x, e) -> check e ((Ident x)::bound_vars)
+    | Function (x, e) -> check e ((x)::bound_vars)
     | Appl (e1, e2) -> check e1 bound_vars; check e2 bound_vars
-    | Let (Ident x, e2, e3) -> 
-      check e2 bound_vars;  (* Check the binding expression with the current bound variables *)
-      check e3 ((Ident x)::bound_vars)  (* Check the body expression, adding the new variable to the list of bound variables *)
-    | LetRec (Ident f, Ident x, e1, e2) -> 
-      check e1 ((Ident f)::(Ident x)::bound_vars);  (* Ensure f is available for recursion in e1 *)
-      check e2 ((Ident f)::bound_vars)  (* Ensure f is also available in e2 *)
-    
+    | Let (x, e1, e2) -> check e1 bound_vars; check e2 ((x)::bound_vars)
+    | LetRec (f, x, e1, e2) -> check e1 ((x)::(f)::bound_vars); check e2 ((x)::(f)::bound_vars)
   in
   check expr []
 
@@ -96,12 +91,12 @@ let rec eval e =
         Bool v1 -> Bool(not v1)
         | _ -> raise Bug)
     |If(e1, e2, e3) ->
-      (let (v1, v2, v3) = (eval e1, eval e2, eval e3) in
+      (let v1 = eval e1 in
       let closed = check_closed e in
       if closed <> () then raise NotClosed
       else
-      match (v1, v2, v3) with
-      (Bool(v1), _, _ )-> if v1 then v2 else v3
+      match v1 with
+      (Bool(v1))-> if v1 then eval e2 else eval e3
       | _ -> raise Bug)
     |Function (e1, e2) -> 
       (let closed = check_closed e in
@@ -112,28 +107,25 @@ let rec eval e =
     |Appl (e1, e2) ->
       (let rec apply_function f arg = match f with
       | Function (Ident x, body) ->
-          let arg_val = eval arg in  (* Ensure the argument is evaluated *)
-          let substituted_body = subst (Ident x, arg_val) body in  (* Substitute the argument into the function body *)
-          let result = eval substituted_body in  (* Evaluate the substituted body *)
+          let arg_val = eval arg in  
+          let substituted_body = subst (Ident x, arg_val) body in  
+          let result = eval substituted_body in 
           (match result with
-           | Appl _ -> eval result  (* If the result is another application, evaluate it *)
-           | _ -> result)  (* If the result is not an application, return it as is *)
-      | Appl (f', arg') -> apply_function (eval f') arg'  (* Handle nested applications *)
+           | Appl _ -> eval result  
+           | _ -> result) 
+      | Appl (f', arg') -> apply_function (eval f') arg' 
       | _ -> raise Bug in
     apply_function (eval e1) e2)
-    |Let (Ident x, e1, e2) ->
-      let value = eval e1 in  (* Evaluate the binding expression *)
-      let substituted_e2 = subst (Ident x, value) e2 in  (* Substitute the bound value into the body *)
-      eval substituted_e2  (* Evaluate the substituted body *)
+    |Let (x, e1, e2) ->
+      let value = eval e1 in  
+      let substituted_e2 = subst (x, value) e2 in  
+      eval substituted_e2  
     
-    | LetRec (Ident f, Ident x, func_body, in_expr) ->
-      (* Hypothetically substitute the function into itself for recursion; this is a simplification *)
-      let rec self_substituting_func_body = subst (Ident f, Function (Ident x, func_body)) func_body in
-      let func_value = Function (Ident x, self_substituting_func_body) in
-      let substituted_in_expr = subst (Ident f, func_value) in_expr in
+    |LetRec (f, x, func_body, in_expr) ->
+      let rec self_substituting_func_body = subst ( f, Function (x, func_body)) func_body in
+      let func_value = Function (x, self_substituting_func_body) in
+      let substituted_in_expr = subst (f, func_value) in_expr in
       eval substituted_in_expr
-
-    (*what is the difference between function and application?*)
     
       
 

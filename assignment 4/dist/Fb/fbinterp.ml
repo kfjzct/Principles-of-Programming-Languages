@@ -5,15 +5,15 @@ exception NotClosed
 
 let rec check_closed expr = 
   let rec check expr bound_vars = match expr with
-    | Var (Ident x) -> if List.mem (Ident x) bound_vars then () else raise NotClosed
+    | Var (x) -> if List.mem (x) bound_vars then () else raise NotClosed
     | Int _ | Bool _ -> ()
     | Plus (e1, e2) | Minus (e1, e2) | Equal (e1, e2) | And (e1, e2) | Or (e1, e2) -> check e1 bound_vars; check e2 bound_vars
     | Not e -> check e bound_vars
     | If (e1, e2, e3) -> check e1 bound_vars; check e2 bound_vars; check e3 bound_vars
-    | Function (Ident x, e) -> check e ((Ident x)::bound_vars)
+    | Function (x, e) -> check e ((x)::bound_vars)
     | Appl (e1, e2) -> check e1 bound_vars; check e2 bound_vars
-    | Let (Ident x, e1, e2) -> check e1 bound_vars; check e2 ((Ident x)::bound_vars)
-    | LetRec (Ident f, Ident x, e1, e2) -> check e1 ((Ident x)::(Ident f)::bound_vars); check e2 ((Ident x)::(Ident f)::bound_vars)
+    | Let (x, e1, e2) -> check e1 bound_vars; check e2 ((x)::bound_vars)
+    | LetRec (f, x, e1, e2) -> check e1 ((x)::(f)::bound_vars); check e2 ((x)::(f)::bound_vars)
   in
   check expr []
 
@@ -91,12 +91,12 @@ let rec eval e =
         Bool v1 -> Bool(not v1)
         | _ -> raise Bug)
     |If(e1, e2, e3) ->
-      (let (v1, v2, v3) = (eval e1, eval e2, eval e3) in
+      (let v1 = eval e1 in
       let closed = check_closed e in
       if closed <> () then raise NotClosed
       else
-      match (v1, v2, v3) with
-      (Bool(v1), _, _ )-> if v1 then v2 else v3
+      match v1 with
+      (Bool(v1))-> if v1 then eval e2 else eval e3
       | _ -> raise Bug)
     |Function (e1, e2) -> 
       (let closed = check_closed e in
