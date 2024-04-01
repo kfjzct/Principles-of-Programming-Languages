@@ -518,7 +518,7 @@ let bump_general = "(Fun op -> Fun x -> If op x 0 Then 1 Else 0)"
 
 (* Now feed in a concrete function for equivalence *)
 
-let new_bump = bump_general ^ "(Fun n1 -> Fun n2 -> n1 = (n2 + 0))"
+let new_bump = bump_general ^ "(Fun n1 -> Fun n2 -> n1 = n2)"
 
 (* The following two tests should give the same result *)
 
@@ -645,7 +645,10 @@ let ycomb =
   "(Fun code -> 
         Let repl = Fun self -> Fun x -> code (self self) x 
         In repl repl)"
-
+let ytest = 
+   "(Fun code -> Fun arg 
+      Let repl = Fun self -> Fun x -> code (self self) x 
+      In tesrepl repl)"
 (* Again lets verify this works *)
 let goy = ycomb ^ code ^ " 5"
 
